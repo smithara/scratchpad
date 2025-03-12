@@ -1,0 +1,26 @@
+name: jlab
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - jupyterlab=4
+  - ipywidgets
+  - pyviz_comms
+  - nb_conda_kernels
+  - jupyterlab-git
+  - jupyterlab-github
+  - dask-labextension
+  - jupyterlab-lsp
+  - jupyterlab-myst
+  - jupyter-lsp-python
+  - jupyter-ruff
+  - jupyter-resource-usage
+#  - jupyterlab-topbar  # not yet for jlab 4?
+  - jupyterlab_rise
+#  - ipydrawio  # not yet for jlab 4?
+  - jupyter-ai
+  - langchain-openai
+  - jupyter-fs
+  - jupyter-scheduler
+  - git  # since system git isn't found within JupyterLab Destkop (Flatpak)
+
