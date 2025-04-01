@@ -1,0 +1,3 @@
+[submodule "BGS-MMA-2E/Natalia-MMA-2E"]
+	path = BGS-MMA-2E/Natalia-MMA-2E
+	url = git@github.com:natgomezperez/MMA-2E.git
