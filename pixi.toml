@@ -1,0 +1,43 @@
+[workspace]
+name = "jlab"
+version = "0.1.0"
+description = "JupyterLab environment with geoscience extensions"
+channels = ["conda-forge"]
+platforms = ["linux-64"]
+
+[pypi-options]
+prerelease-mode = "allow"
+
+[dependencies]
+python = "*"
+jupyterlab = "*"
+ipywidgets = "*"
+pyviz_comms = "*"
+nb_conda_kernels = "*"
+jupyterlab-git = "*"
+jupyterlab-github = "*"
+dask-labextension = "*"
+jupyterlab-lsp = "*"
+jupyterlab-myst = "*"
+jupyter-lsp-python = "*"
+jupyter-ruff = "*"
+jupyter-resource-usage = "*"
+jupyterlab_rise = "*"
+jupyter-fs = "*"
+# jupyter-scheduler = "*"
+
+[pypi-dependencies]
+jupyter-ai = ">=3.0.0b9"
+langchain-anthropic = ">=1.3.3"
+langchain-core = ">=1.2.11,<2.0.0"
+langchain-openai = "*"
+
+[tasks]
+# Setup
+setup-scratchpad = { cmd = "uv sync", description = "Install scratchpad dependencies using UV" }
+setup-vre = { cmd = "bash extract-vre-environment.sh", description = "Extract VRE Docker environment" }
+setup-ai = { cmd = "bash setup-jupyter-ai.sh", description = "Configure Jupyter AI with Anthropic Claude (loads API key from .env)" }
+setup-all = { depends-on = ["setup-scratchpad", "setup-vre", "setup-ai"], description = "Run all setup tasks (scratchpad, VRE, AI)" }
+
+# JupyterLab
+jlab = { cmd = "bash start-jupyter.sh", description = "Launch JupyterLab with Chromium browser (usage: pixi run jlab [directory])" }
