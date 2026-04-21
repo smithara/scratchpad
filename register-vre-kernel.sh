@@ -12,9 +12,18 @@ set -e
 #   - You want a custom kernel display name
 #   - For compatibility with older Jupyter setups
 
-TAG="${1:-1.0.11}"
+ENV_FILE="$(dirname "$0")/.env"
+if [ -f "$ENV_FILE" ]; then
+    set -a
+    source "$ENV_FILE"
+    set +a
+fi
+
+: "${VRE_TAG:?VRE_TAG must be set in .env}"
+
+TAG="${1:-${VRE_TAG}}"
 ENVS_DIR="${HOME}/miniforge3/envs"
-ENV_NAME="vre-${TAG}"
+ENV_NAME="vre"
 ENV_PATH="${ENVS_DIR}/${ENV_NAME}"
 DISPLAY_NAME="VRE Python ${TAG}"
 
@@ -34,8 +43,8 @@ echo ""
 if [ ! -d "${ENV_PATH}" ]; then
     echo "❌ Error: Environment not found at ${ENV_PATH}"
     echo ""
-    echo "Available VRE environments:"
-    ls -1 "${ENVS_DIR}" 2>/dev/null | grep "^vre-" || echo "  (none)"
+    echo "Available conda environments:"
+    ls -1 "${ENVS_DIR}" 2>/dev/null || echo "  (none)"
     echo ""
     echo "Run extract-vre-environment.sh first to extract the environment."
     exit 1

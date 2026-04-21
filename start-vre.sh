@@ -6,7 +6,6 @@
 set -e
 
 IMAGE="registry.gitlab.eox.at/esa/vires_vre_ops/vre-swarm-notebook"
-TAG="1.0.11"
 WORKDIR="/home/ash/code"
 
 echo "=========================================="
@@ -29,6 +28,9 @@ if [ -f "$ENV_FILE" ]; then
         echo "$VRE_REGISTRY_PASSWORD" | podman login --username "$VRE_REGISTRY_USERNAME" --password-stdin registry.gitlab.eox.at 2>/dev/null || true
     fi
 fi
+
+: "${VRE_TAG:?VRE_TAG must be set in .env}"
+TAG="${VRE_TAG}"
 
 echo "Starting container..."
 echo "Access at: http://localhost:10000"

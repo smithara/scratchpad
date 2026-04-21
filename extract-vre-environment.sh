@@ -4,10 +4,19 @@ set -e
 # VRE Environment Extractor
 # Extracts the conda environment from VRE Docker container to miniforge3 envs
 
+ENV_FILE="$(dirname "$0")/.env"
+if [ -f "$ENV_FILE" ]; then
+    set -a
+    source "$ENV_FILE"
+    set +a
+fi
+
+: "${VRE_TAG:?VRE_TAG must be set in .env}"
+
 IMAGE="registry.gitlab.eox.at/esa/vires_vre_ops/vre-swarm-notebook"
-TAG="1.0.11"
+TAG="${VRE_TAG}"
 ENVS_DIR="${HOME}/miniforge3/envs"
-ENV_NAME="vre-${TAG}"
+ENV_NAME="vre"
 ENV_PATH="${ENVS_DIR}/${ENV_NAME}"
 
 echo "========================================"

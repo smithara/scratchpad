@@ -35,7 +35,7 @@ langchain-openai = "*"
 [tasks]
 # Setup
 setup-scratchpad = { cmd = "uv sync", description = "Install scratchpad dependencies using UV" }
-setup-vre = { cmd = "bash extract-vre-environment.sh", description = "Extract VRE Docker environment" }
+setup-vre = { cmd = "bash extract-vre-environment.sh && bash register-vre-kernel.sh", description = "Extract VRE Docker environment" }
 setup-ai = { cmd = "bash setup-jupyter-ai.sh", description = "Configure Jupyter AI with Anthropic Claude (loads API key from .env)" }
 setup-all = { depends-on = ["setup-scratchpad", "setup-vre", "setup-ai"], description = "Run all setup tasks (scratchpad, VRE, AI)" }
 
